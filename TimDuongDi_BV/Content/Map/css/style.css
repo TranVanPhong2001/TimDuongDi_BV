@@ -7,19 +7,25 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: "Cascadia Code";
+    font-family: "Arial";
     font-style: normal;
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
 }
 
-body{
-    font-family: "Cascadia Code", cursive;
-    margin: 0;
-    background: #333;
-    color: #eee;
-    scroll-behavior: smooth;
+body {
+    overflow-x: hidden;
+}
+
+:root {
+    --primary-color: #2c3855;
+    --primary-color-dark: #435681;
+    --text-dark: #333333;
+    --text-light: #767268;
+    --extra-light: #f3f4f6;
+    --white: #fff;
+    --max-width: 1200px
 }
 
 body h2 {
@@ -29,7 +35,7 @@ body h2 {
     font-size: 40px;
     font-weight: bold;
 }
-
+/* --------------------------- header ------------------------------- */
 header {
     justify-content: center;
     width: 100%;
@@ -37,22 +43,28 @@ header {
 }
 
 .inner_header{
-    background-color: rgb(0,0,0,0.7);
-    width: 100%;
-    height: 70px;
-    padding: 0 50px;
+    max-width: 90%;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
+    /* background-color: var(--white); */
+    background-color: rgb(255,255,255,0.8);
+    width: 90%;
+    height: 60px;
+    top: 1rem;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
     z-index: 100;
-    border-bottom: 1px solid #fff;
-    margin-top: -20px;
 }
 
 .inner_header .logo {
     display: inline-block;
-    color: #fff;
+    color: #333;
     font-size: 30px;
     text-transform: uppercase;
 }
@@ -64,7 +76,7 @@ header {
     display: flex;
 }
 .list_contact ul li a {
-    color: #fff;
+    color: #333;
     padding: 5px 0;
     margin: 0 10px;
     border: 3px solid transparent;
@@ -98,7 +110,7 @@ header {
     width: 30px;
     height: 3px;
     margin: 5px 0;
-    background: #fff;
+    background: #333;
 }
 @media only screen and (max-width: 900px) {
     .list_contact {
@@ -113,7 +125,8 @@ header {
         position: absolute;
         width: 100%;
         left: -100%;
-        top: 70px;
+        top: 60px;
+        border-radius: 1rem;
         background-color: rgb(0,0,0,0.5);
         padding: 20px;
         transition: 0.5s all;
@@ -135,17 +148,30 @@ header {
         
     }
 }
-/* css slider */
+
+/*------------------------ slider ------------------------*/
 .slider{
-    height: 100vh;
-    margin-top: -50px;
+    left: 5%;
+    height: 90vh;
+    margin-top: 100px;
+    margin-bottom: 50px;
     position: relative;
+    width: 90%;
+    overflow-x: scroll;
+    overflow: hidden;
+    border-radius: 1rem;
 }
 
 .slider p {
-    margin-left:200px;
-    width: 500px;
+    margin-left: 200px;
     font-size: 20px;
+    color: #fff;
+    width: 100%;
+}
+.slider h2 {
+    font-size: 20px;
+    color: #fff;
+    width: 100%;
 }
 
 .slider .list .item{
@@ -159,6 +185,7 @@ header {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 1rem;
 }
 .slider .list .item::after{
     content: '';
@@ -168,7 +195,7 @@ header {
     left: 0;
     bottom: 0;
     background-image: linear-gradient(
-        to top, rgb(0,0,0,0.5)  40%, transparent
+        to top, rgb(0,0,0,0.5)  50%, transparent
     );
 }
 .slider .list .item .content{
@@ -271,6 +298,7 @@ header {
 .thumbnail .item .content{
     position: absolute;
     inset: auto 10px 10px 10px;
+    color: #fff;
 }
 
 @media screen and (max-width: 800px) {
@@ -290,16 +318,19 @@ header {
     }
 }
 
+/* -------------------------- space ----------------------------- */
 .space{
-    background: #000;
-    height: 2px;
+    background: #333;
+    height: 1px;
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
-    /* border-bottom: 1px solid #fff; */
 }
 
+/*------------------------------- option_floor -------------------------*/
+.option_floor{
+    margin-bottom: 50px;
+}
 
 .map {
     display: flex;
@@ -310,7 +341,7 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     height: 60vh;
-    border-radius: 50px;
+    border-radius: 2rem;
     color: #333;
     cursor: pointer;
     flex: 0.5;
@@ -359,20 +390,30 @@ header {
     }
 }
 
-.partner{
+/*-------------------- footer ----------------------  */
+footer {
+    background-color:  rgb(0, 0, 0 ,0.7);
+    color: #fff;
+    width: 100%;
+}
+
+.partner {
     display: flex;
-    justify-content:space-around;
-    padding: 10px 20px 10px 15px; 
+    justify-content: space-around;
+    padding: 10px 20px 10px 15px;
+    margin-bottom: 50px;
+    background-color: rgba(0,0,0,0.1);
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+    width: 100%;
+    flex-direction: column;
+    border-radius: 1rem;
 }
 .partner img{
     border-radius: 30px;
-    width:150px; height:150px;
-}
-
-
-
-footer {
-    background-color: rgb(0,0,0,0.5);
+    width:150px; 
+    height:150px;
 }
 
 .profile {
@@ -412,10 +453,9 @@ footer {
 }
 
 .copyright {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
-    gap: 5px;
 }
 
 .scroll_to_top.show {
@@ -430,17 +470,8 @@ footer {
     text-align: center;
     line-height: 50px;
 }
-/* ----------------------------------------- */
 
-.partner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* min-height: 100vh; */
-    width: 100%;
-    background-color: rgb(0,0,0,0.5);
-    flex-direction: column;
-}
+
 
 .partner .title h2 {
     text-align: center;
@@ -461,9 +492,10 @@ footer {
 }
 
 .scroll {
+    
     position: relative;
     display: flex;
-    width: 60%;
+    width: 80%;
     overflow: hidden;
     -webkit-mask-image: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent)
 }
@@ -570,5 +602,205 @@ footer {
 @media screen and (max-width: 600px) {
     .scroll {
         width: 80%;
+    }
+}
+
+/*--------------------------- floor_01 -------------------------*/
+/*------------------------- Box_location--------------------------  */
+@media screen and (max-width: 650px) {
+    .icon i {
+        display: none;
+    }
+
+    .box_location {
+        flex-direction: column;
+    }
+    .dropdown {
+        width: 80%;
+    }
+}
+.box_location{
+    margin-top: -20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.dropdown {
+    min-width: 15em;
+    position: relative;
+    margin: 2em;
+}
+
+.dropdown * {
+    box-sizing: border-box;
+}
+
+.select {
+    background: #2a2f3b;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #2a2f3b;
+    border-radius: 5.5em;
+    padding: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.form-control{
+    font-size: 18px;
+    color: #fff;
+    background: none;
+    border: none;
+}
+
+.form-control option {
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background: #23242a;
+}
+
+.form-control option:hover {
+    background: #2a2d35;
+}
+
+.active {
+    background: #23242a;
+}
+
+.menu-open {
+    display: block;
+    opacity: 1;
+}
+
+.icon i {
+    font-size: 40px;
+}
+
+.title h2 {
+    margin-top: 70px;
+}
+
+.image-display {
+    display: flex;
+    justify-content: center;
+}
+    .image-display img {
+        object-fit: cover;
+        width: 80%;
+        min-height: 100%;
+        border-radius: 10px;
+    }
+
+button {
+    font-size: 1.2rem;
+    color: #FAFAFA;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #FAFAFA;
+    background: #252525;
+    box-shadow: 3px 3px #fafafa;
+    cursor: pointer;
+    margin: 35px 0;
+}
+  
+button:active {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+}
+
+/*----------------------------------- box_note ------------------------------------  */
+.box_note {
+    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    margin-left: 10%;
+}
+
+.note {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_note {
+    display: grid;
+}
+.list_note3 {
+    display: block;
+}
+
+.box_3 {
+    display: flex;
+    justify-content: start;
+    padding: 10px;
+    color: #23242a;
+    font-size: 20px;
+    gap: 10px;
+}
+
+.box_3 .color {
+    background: #7D4A82;
+    color: #7D4A82;
+    width: 25px;
+    height: 25px;
+}
+
+.box_3 .color_12 {
+    background: #4E4EE5;
+    color: #4E4EE5;
+}
+
+.box_3 .color_14 {
+    background: #E05E75;
+    color: #E05E75;
+}
+    .box_3 .color_19 {
+        background: #DD7B21;
+        color: #DD7B21;
+    }
+
+
+.box_3 .color_15 {
+    background: #698841;
+    color: #698841;
+}
+
+.box_3 .color_16 {
+    background: #5BBD5B;
+    color: #5BBD5B;
+}
+
+.box_3 .color_18 {
+    background: #FB1E00;
+    color: #FB1E00;
+}
+
+.box_3 .color_114 {
+    background: #4ACC4A;
+    color: #4ACC4A;
+}
+
+@media screen and (max-width: 920px) {
+    .note {
+        flex-wrap: wrap;
+        justify-content: baseline;
+    }
+}
+@media screen and (max-width: 660px) {
+    .note {
+        display: grid;
+        justify-content: center;
     }
 }
