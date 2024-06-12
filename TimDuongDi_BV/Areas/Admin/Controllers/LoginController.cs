@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace TimDuongDi_BV.Areas.Admin.Controllers
 {
-    [Authorize]
+    
     public class LoginController : Controller
     {
         // GET: Admin/Login

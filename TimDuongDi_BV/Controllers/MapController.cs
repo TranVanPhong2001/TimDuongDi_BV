@@ -7,7 +7,7 @@ using TimDuongDi_BV.Models;
 
 namespace TimDuongDi_BV.Controllers
 {
-    [Authorize]
+    
     public class MapController : Controller
     {
         private Map db = new Map();

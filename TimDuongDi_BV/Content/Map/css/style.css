@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 ::-webkit-scrollbar {
     width: 0;
@@ -671,9 +671,9 @@ footer {
     background: #2a2d35;
 }
 
-.active {
+/*.active {
     background: #23242a;
-}
+}*/
 
 .menu-open {
     display: block;
@@ -691,12 +691,24 @@ footer {
 .image-display {
     display: flex;
     justify-content: center;
+    align-items: center; /* Center images vertically */
+    flex-direction: column; /* Align items vertically */
 }
-    .image-display img {
-        object-fit: cover;
-        width: 80%;
-        min-height: 100%;
-        border-radius: 10px;
+.image-display img {
+     object-fit: cover;
+    width: 80%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.route-container {
+    display: flex;
+    flex-direction: column; /* Arrange images in a column */
+    align-items: center;
+}
+
+    .route-container img {
+        width: 80%; /* Adjust the width to fit two images side by side */
     }
 
 button {
@@ -761,15 +773,56 @@ button:active {
     background: #4E4EE5;
     color: #4E4EE5;
 }
+    .box_3 .color_2 {
+        background: #8282D7;
+        color: #4E4EE5;
+    }
+    .box_3 .color_3 {
+        background: #E88AD9;
+        color: #4E4EE5;
+    }
+    .box_3 .color_4 {
+        background: #ED790E;
+        color: #4E4EE5;
+    }
+    .box_3 .color_5 {
+        background: #4174FA;
+        color: #4E4EE5;
+    }
+    .box_3 .color_6 {
+        background: #E92B9D;
+        color: #4E4EE5;
+    }
 
 .box_3 .color_14 {
     background: #E05E75;
     color: #E05E75;
 }
-    .box_3 .color_19 {
+.box_3 .color_19 {
         background: #DD7B21;
         color: #DD7B21;
+}
+    .box_3 .color_20 {
+        background: #808080;
+        color: #DD7B21;
     }
+    .box_3 .color_21 {
+        background: #EF8C9E;
+        color: #DD7B21;
+    }
+    .box_3 .color_22 {
+        background: #F1EBB4;
+        color: #DD7B21;
+    }
+    .box_3 .color_23 {
+        background: #41DB41;
+        color: #DD7B21;
+    }
+    .box_3 .color_24 {
+        background: #B7C65B;
+        color: #DD7B21;
+    }
+
 
 
 .box_3 .color_15 {
@@ -802,5 +855,28 @@ button:active {
     .note {
         display: grid;
         justify-content: center;
+    }
+}
+/* CSS cho thiết bị di động */
+@media (max-width: 768px) {
+    .box_location {
+        flex-direction: column;
+    }
+
+    .dropdown, .icon {
+        margin: 10px 0;
+    }
+
+    .select {
+        width: 100%;
+    }
+
+    .icon {
+        display: none;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        margin-top: 20px;
     }
 }

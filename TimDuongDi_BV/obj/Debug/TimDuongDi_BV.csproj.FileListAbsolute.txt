@@ -1,3 +1,5 @@
+C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\obj\Debug\TimDuongDi_BV.csproj.AssemblyReference.cache
+C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\obj\Debug\TimDuongDi_BV.csproj.CoreCompileInputs.cache
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\bin\TimDuongDi_BV.dll.config
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\bin\TimDuongDi_BV.dll
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\bin\TimDuongDi_BV.pdb
@@ -76,8 +78,6 @@ C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\bin\System.Web.WebPages.
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\bin\Newtonsoft.Json.xml
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\bin\Antlr3.Runtime.pdb
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\obj\Debug\TimDuongDi_BV.csproj.AssemblyReference.cache
-C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\obj\Debug\TimDuongDi_BV.csproj.CoreCompileInputs.cache
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\obj\Debug\TimDuongDi_BV.csproj.CopyComplete
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\obj\Debug\TimDuongDi_BV.dll
 C:\Users\bpt21\source\repos\TimDuongDi_BV\TimDuongDi_BV\obj\Debug\TimDuongDi_BV.pdb

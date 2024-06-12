@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TimDuongDi_BV.Models.DuongDi>
+
+@{
+    ViewBag.Title = "ListKhu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListKhu</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tang.tenTang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.diemDi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.diemDen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.loTrinh)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tang.tenTang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.diemDi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.diemDen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loTrinh)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Khu", "Khu", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

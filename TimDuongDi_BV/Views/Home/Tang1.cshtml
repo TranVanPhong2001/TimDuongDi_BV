@@ -1,217 +1,235 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Tang1";
 
     var selectedDiemDi = ViewBag.DiemDi as string ?? "Vị trí hiện tại";
     var selectedDiemDen = ViewBag.DiemDen as string ?? "Vị trí muốn đến";
     var currentTang = ViewBag.Tang ?? 1;
+    var selectedDiemDenTang2 = ViewBag.DiemDenTang2 as string;
+    var selectedDiemDenTang3 = ViewBag.DiemDenTang3 as string;
+    var useElevator = ViewBag.UseElevator as bool? ?? false;
+    var useStairs = ViewBag.UseStairs as bool? ?? false;
 }
 
-
-<div class="space"></div>
-
-<div class="title">
-    <h2>Tìm nơi bạn muốn đến</h2>
-</div>
-
-<form class="box_location" action="/Home/TimLoTrinh" method="post">
-
-
-    <div class="dropdown">
-        <div class="select">
-            <select class="form-control" name="diemDi" id="diemDi">
-                <option value="1">Vị trí hiện tại</option>
-                @foreach (var item in ViewBag.DiemDiList)
-                {
-                    <option value="@item" @(item == selectedDiemDi ? "selected" : "")>@item</option>
-                }
-            </select>
+<main>
+    <div class="space"></div>
+    <div class="title">
+        <h2>Tìm nơi bạn muốn đến</h2>
+    </div>
+    <form class="box_location" action="/Home/TimLoTrinh" method="post">
+        <!-- Dropdown chọn tầng -->
+        <div class="dropdown">
+            <div class="select">
+                <label for="floorSelect">Chuyển tầng:</label>
+                <select id="floorSelect" class="form-control" onchange="changeFloor()">
+                    <option value="1" @(currentTang == 1 ? "selected" : "")>Tầng 1</option>
+                    <option value="2" @(currentTang == 2 ? "selected" : "")>Tầng 2</option>
+                    <option value="3" @(currentTang == 3 ? "selected" : "")>Tầng 3</option>
+                </select>
+            </div>
         </div>
-    </div>
-
-    <div class="icon">
-        <i class='bx bx-chevrons-right bx-fade-right'></i>
-    </div>
-
-    <div class="dropdown">
-        <div class="select">
-            <select class="form-control" name="diemDen" id="diemDen" onchange="showTangList()">
-                <option value="">Vị trí muốn đến</option>
-                @foreach (var item in ViewBag.DiemDenListTang1)
-                {
-                    <option value="@item" @(item == selectedDiemDen ? "selected" : "")>@item</option>
-                }
-                <option value="Tầng 2">Chọn tầng 2</option>
-                <option value="Tầng 3">Chọn tầng 3</option>
-            </select>
+        <div class="dropdown">
+            <div class="select">
+                <select class="form-control" name="diemDi" id="diemDi">
+                    <option value="1">Vị trí hiện tại</option>
+                    @foreach (var item in ViewBag.DiemDiList)
+                    {
+                        <option value="@item" @(item == selectedDiemDi ? "selected" : "")>@item</option>
+                    }
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div id="tang2List" class="dropdown" style="display:none;">
-        <div class="select">
-            <select class="form-control" name="diemDenTang2">
-                <option value="">Vị trí muốn đến (Tầng 2)</option>
-                @foreach (var item in ViewBag.DiemDenListTang2)
-                {
-                    <option value="@item">@item</option>
-                }
-            </select>
+        <div class="icon">
+            <i class='bx bx-chevrons-right bx-fade-right'></i>
         </div>
-    </div>
-
-    <div id="tang3List" class="dropdown" style="display:none;">
-        <div class="select">
-            <select class="form-control" name="diemDenTang3">
-                <option value="">Vị trí muốn đến (Tầng 3)</option>
-                @foreach (var item in ViewBag.DiemDenListTang3)
-                {
-                    <option value="@item">@item</option>
-                }
-            </select>
+        <div class="dropdown">
+            <div class="select">
+                <select class="form-control" name="diemDen" id="diemDen" onchange="showTangList()">
+                    <option value="">Vị trí muốn đến</option>
+                    @foreach (var item in ViewBag.DiemDenListTang1)
+                    {
+                        <option value="@item" @(item == selectedDiemDen ? "selected" : "")>@item</option>
+                    }
+                    <option value="Tầng 2" @(selectedDiemDen == "Tầng 2" ? "selected" : "")>Chọn tầng 2</option>
+                    <option value="Tầng 3" @(selectedDiemDen == "Tầng 3" ? "selected" : "")>Chọn tầng 3</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <input type="hidden" name="tang" value="@currentTang" />
-    <button type="submit">Tìm kiếm</button>
 
-</form>
-@if (ViewBag.Message != null)
-{
-    <div class="alert alert-info" style="text-align: center; margin-top: 20px;">
-        @ViewBag.Message
-    </div>
-}
-<div class="image-display">
-    @if (ViewBag.Route != null)
+        <div id="tang2List" class="dropdown" style="display:@(selectedDiemDen == "Tầng 2" ? "block" : "none");">
+            <div class="select">
+                <select class="form-control" name="diemDenTang2">
+                    <option value="">Vị trí muốn đến (Tầng 2)</option>
+                    @foreach (var item in ViewBag.DiemDenListTang2)
+                    {
+                        <option value="@item" @(item == selectedDiemDenTang2 ? "selected" : "")>@item</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <input type="checkbox" name="useElevator" id="useElevator" value="true" @(useElevator ? "checked" : "")>
+                <label for="useElevator">Thang máy (1 đến 3)</label>
+                <input type="checkbox" name="useStairs" id="useStairs" value="true" @(useStairs ? "checked" : "")>
+                <label for="useStairs">Thang bộ</label>
+            </div>
+        </div>
+
+        <div id="tang3List" class="dropdown" style="display:@(selectedDiemDen == "Tầng 3" ? "block" : "none");">
+            <div class="select">
+                <select class="form-control" name="diemDenTang3">
+                    <option value="">Vị trí muốn đến (Tầng 3)</option>
+                    @foreach (var item in ViewBag.DiemDenListTang3)
+                    {
+                        <option value="@item" @(item == selectedDiemDenTang3 ? "selected" : "")>@item</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <input type="checkbox" name="useElevator" id="useElevator" value="true" @(useElevator ? "checked" : "")>
+                <label for="useElevator">Thang máy</label>
+                <input type="checkbox" name="useStairs" id="useStairs" value="true" @(useStairs ? "checked" : "")>
+                <label for="useStairs">Thang bộ</label>
+            </div>
+        </div>
+        <input type="hidden" name="tang" value="@currentTang" />
+        <button type="submit">Tìm kiếm</button>
+    </form>
+    @if (ViewBag.Message != null)
     {
-        <img id="floorMap" src="@ViewBag.Route" alt="Floor Map">
+        <div class="alert alert-info" style="text-align: center; margin-top: 20px;">
+            @ViewBag.Message
+        </div>
     }
-    else
-    {
-        <img id="defaultImage" src="~/Content/Map/imgs/floor/MAP_1.png" alt="Default Image">
-    }
-</div>
-<!-- Dropdown chọn tầng -->
-<div class="box_location">
-    <label for="floorSelect">Chọn tầng:</label>
-    <select id="floorSelect" class="form-control" onchange="changeFloor()">
-        <option value="1" @(currentTang == 1 ? "selected" : "")>Tầng 1</option>
-        <option value="2" @(currentTang == 2 ? "selected" : "")>Tầng 2</option>
-        <option value="3" @(currentTang == 3 ? "selected" : "")>Tầng 3</option>
-    </select>
-</div>
+    <div class="image-display">
+        @if (ViewBag.Route != null)
+        {
+            <img id="floorMap" src="@ViewBag.Route" alt="Floor Map">
+        }
+        else if (ViewBag.RoutePart1 != null && ViewBag.RoutePart2 != null)
+        {
+            <div class="route-container">
+                <img id="routePart1" src="@ViewBag.RoutePart1" alt="Route Part 1">
+                <img id="routePart2" src="@ViewBag.RoutePart2" alt="Route Part 2">
+            </div>
+        }
+        else
+        {
+            <img id="defaultImage" src="~/Content/Map/imgs/floor/MAP_1.png" alt="Default Image">
+        }
+    </div>
 
+    <article class="box_note">
+        <div class="note">
+            <ul class="list_note">
+                <div class="box_3">
+                    <div class="color color_11">0</div>
+                    <div>1.1</div>
+                    <p>Khoa khám bệnh</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_12">0</div>
+                    <div>1.2</div>
+                    <p>Khu lấy mẫu xét nghiệm</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_11">0</div>
+                    <div>1.3</div>
+                    <p>Khu khám dịch vụ / Tẩm soát ung thư</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_14">0</div>
+                    <div>1.4</div>
+                    <p>Nhà thuốc</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_15">0</div>
+                    <div>1.5</div>
+                    <p>Khoa chăm sóc giảm nhẹ</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_16">0</div>
+                    <div>1.6</div>
+                    <p>Khu siêu âm</p>
+                </div>
+            </ul>
+            <ul class="list_note">
+
+                <div class="box_3">
+                    <div class="color color_16">0</div>
+                    <div>1.7</div>
+                    <p>Khoa chẩn đoán hình ảnh</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_18">0</div>
+                    <div>1.8</div>
+                    <p>Khoa cấp cứu</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_19">0</div>
+                    <div>1.10</div>
+                    <p>Cửa hàng tiện lợi</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_14">0</div>
+                    <div>1.11</div>
+                    <p>Phòng công tác xã hội</p>
+                </div>
+
+                <div class="box_3">
+                    <div class="color color_14">0</div>
+                    <div>1.12</div>
+                    <p>Quầy tiếp nhận</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_14">0</div>
+                    <div>1.13</div>
+                    <p>Dịch vụ tài chính</p>
+                </div>
+
+            </ul>
+            <ul class="list_note3">
+
+                <div class="box_3">
+                    <div class="color color_114">0</div>
+                    <div>1.14</div>
+                    <p>Quầy thông tin</p>
+                </div>
+                <div class="box_3">
+                    <div class="color color_114">0</div>
+                    <div>1.15</div>
+                    <p>Quầy hướng dẫn</p>
+                </div>
+                <div class="box_3">
+                    <img src="/Content/Map/imgs/note/WC.png" width="25" height="25" alt="">
+                    <p>Nhà vệ sinh</p>
+                </div>
+                <div class="box_3">
+                    <img src="~/Content/Map/imgs/note/ThangMay2.jpg" width="25" height="25" alt="">
+                    <p>Thang máy (1 đến 3)</p>
+                </div>
+                <div class="box_3">
+                    <img src="~/Content/Map/imgs/note/ThangMay.png" width="25" height="25" alt="">
+                    <p>Thang máy (1 đến 9)</p>
+                </div>
+                <div class="box_3">
+                    <img src="/Content/Map/imgs/note/ThangBo.png" width="25" height="25" alt="">
+                    <p>Thang bộ</p>
+                </div>
+            </ul>
+        </div>
+    </article>
+
+</main>
 <script>
     function changeFloor() {
         var selectedFloor = document.getElementById('floorSelect').value;
         window.location.href = '/Home/Tang' + selectedFloor;
     }
+
     function showTangList() {
         var selectedDiemDen = document.getElementById('diemDen').value;
         document.getElementById('tang2List').style.display = (selectedDiemDen === "Tầng 2") ? 'block' : 'none';
         document.getElementById('tang3List').style.display = (selectedDiemDen === "Tầng 3") ? 'block' : 'none';
     }
 </script>
-<article class="box_note">
-    <div class="note">
-        <ul class="list_note">
-            <div class="box_3">
-                <div class="color color_11">0</div>
-                <div>1.1</div>
-                <p>Khoa khám bệnh</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_12">0</div>
-                <div>1.2</div>
-                <p>Khu lấy mẫu xét nghiệm</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_11">0</div>
-                <div>1.3</div>
-                <p>Khu khám dịch vụ / Tẩm soát ung thư</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_14">0</div>
-                <div>1.4</div>
-                <p>Nhà thuốc</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_15">0</div>
-                <div>1.5</div>
-                <p>Khoa chăm sóc giảm nhẹ</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_16">0</div>
-                <div>1.6</div>
-                <p>Khu siêu âm</p>
-            </div>
-        </ul>
-        <ul class="list_note">
-            
-            <div class="box_3">
-                <div class="color color_16">0</div>
-                <div>1.7</div>
-                <p>Khoa chẩn đoán hình ảnh</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_18">0</div>
-                <div>1.8</div>
-                <p>Khoa cấp cứu</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_19">0</div>
-                <div>1.10</div>
-                <p>Cửa hàng tiện lợi</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_14">0</div>
-                <div>1.11</div>
-                <p>Phòng công tác xã hội</p>
-            </div>
-
-            <div class="box_3">
-                <div class="color color_14">0</div>
-                <div>1.12</div>
-                <p>Quầy tiếp nhận</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_14">0</div>
-                <div>1.13</div>
-                <p>Dịch vụ tài chính</p>
-            </div>
-
-        </ul>
-        <ul class="list_note3">
-
-            <div class="box_3">
-                <div class="color color_114">0</div>
-                <div>1.14</div>
-                <p>Quầy thông tin</p>
-            </div>
-            <div class="box_3">
-                <div class="color color_114">0</div>
-                <div>1.15</div>
-                <p>Quầy hướng dẫn</p>
-            </div>
-            <div class="box_3">
-                <img src="/Content/Map/imgs/note/WC.png" width="25" height="25" alt="">
-                <p>Nhà vệ sinh</p>
-            </div>
-            <div class="box_3">
-                <img src="/Content/Map/imgs/note/ThangMay.png" width="25" height="25" alt="">
-                <p>Thang máy (1 đến 3)</p>
-            </div>
-            <div class="box_3">
-                <img src="/Content/Map/imgs/note/ThangMay2.jpg" width="25" height="25" alt="">
-                <p>Thang máy (1 đến 9)</p>
-            </div>
-            <div class="box_3">
-                <img src="/Content/Map/imgs/note/ThangBo.png" width="25" height="25" alt="">
-                <p>Thang bộ</p>
-            </div>
-        </ul>
-    </div>
-</article>
-<script src="~/Content/Map/js/floor2.js"></script>
-
-
-
+<script src="~/Content/Map/js/floor.js"></script>
